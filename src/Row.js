@@ -30,13 +30,21 @@ function Row({title, fetchUrl, isLargeRow}){
 
             autoplay:1,
         },
-    }
-
+    };
+    const handleClick= (movie) =>{
+        if(trailerUrl){
+            setTrailerUrl("")
+        }else{
+            movieTrailer(movie?.name || "")
+            .then ((url)=>{
+                const urlParams = new URLSearchParams(new URL(url).search);
                 setTrailerUrl(urlParams.get('v'));
             })
             .catch((error) => console.log(error));
         }
-    }
+
+    };
+
     return(
         <div className="row">
            <h2>{title}</h2>
